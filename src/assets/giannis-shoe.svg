@@ -1,0 +1,45 @@
+<svg width="900" height="600" viewBox="0 0 900 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="shoeBody" x1="120" y1="60" x2="740" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E0E12"/>
+      <stop offset="0.58" stop-color="#171A1F"/>
+      <stop offset="1" stop-color="#2E3137"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="250" y1="170" x2="720" y2="340" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF3A3A"/>
+      <stop offset="1" stop-color="#C4001B"/>
+    </linearGradient>
+    <linearGradient id="sole" x1="180" y1="410" x2="750" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF4A4A"/>
+      <stop offset="1" stop-color="#B60014"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="600" fill="#F3F3F3"/>
+
+  <g>
+    <path d="M120 380C166 332 210 285 260 260C312 233 408 210 495 214C547 216 640 228 705 258C738 274 772 302 795 336L825 408C845 447 823 482 778 484H191C148 484 109 443 120 380Z" fill="url(#shoeBody)"/>
+
+    <path d="M207 282C259 225 319 190 390 178C452 167 514 172 606 196C671 214 732 244 769 286C708 291 643 312 566 333C500 351 427 362 332 369C281 372 235 367 188 353L207 282Z" fill="url(#accent)"/>
+
+    <path d="M196 343C253 327 304 323 350 324C412 325 466 337 530 355C593 372 673 377 754 372C784 370 811 376 833 395C846 405 854 423 851 440C848 457 830 472 803 473H185C152 473 123 445 127 410C131 382 154 361 196 343Z" fill="url(#sole)"/>
+
+    <path d="M255 276L333 254L430 250L504 263L579 290L672 304" stroke="#FF5C5C" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+    <path d="M312 357L388 334L470 333L548 347L630 359" stroke="#FF6170" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+
+    <path d="M245 300L310 295L325 338L278 345L245 300Z" fill="#111315" opacity="0.8"/>
+    <path d="M386 288L465 279L489 331L433 341L386 288Z" fill="#111315" opacity="0.8"/>
+    <path d="M563 290L643 304L658 343L594 351L563 290Z" fill="#111315" opacity="0.8"/>
+
+    <g stroke="#0C0D0F" stroke-width="7" stroke-linecap="round" opacity="0.9">
+      <path d="M296 238L350 245"/>
+      <path d="M347 242L400 247"/>
+      <path d="M393 245L445 252"/>
+      <path d="M440 251L493 258"/>
+      <path d="M488 259L542 270"/>
+      <path d="M536 272L591 286"/>
+    </g>
+
+    <path d="M165 365C210 385 282 401 350 408C458 418 562 416 677 395C719 386 749 390 766 405C781 420 783 440 769 457C742 488 621 500 405 500C245 500 154 468 130 425C122 411 130 382 165 365Z" fill="#C10019" opacity="0.2"/>
+  </g>
+</svg>

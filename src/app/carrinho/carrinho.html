@@ -1,7 +1,57 @@
-<div class="carrinho-container">
-    <span class="qtd-itens">
-        {{carrinhoService.qtdItens()}}</span>
-    <span>
-        <i class="fa-solid fa-bag-shopping"></i>
-    </span>
-</div>
+@if (estaNaPaginaCarrinho) {
+    <section class="pagina-carrinho">
+        <div class="cabecalho-carrinho">
+            <h2>Carrinho de compras</h2>
+        </div>
+
+        @if (carrinhoService.itens().length === 0) {
+            <div class="carrinho-vazio">
+                <p>Seu carrinho está vazio.</p>
+            </div>
+        } @else {
+            <div class="lista-carrinho">
+                @for (item of carrinhoService.itens(); track item.id) {
+                    <article class="card-item">
+                        <div class="info-item">
+                            <h3>{{ item.produto?.nome }}</h3>
+                            <p>Preço unitário: R$ {{ (item.produto?.preco ?? 0) | number: '1.2-2' }}</p>
+                            <p>Subtotal: R$ {{ ((item.produto?.preco ?? 0) * item.quantidade) | number: '1.2-2' }}</p>
+                        </div>
+
+                        <div class="acoes-item">
+                            <div class="controle-quantidade">
+                                <button type="button" (click)="diminuirQuantidade(item)">-</button>
+                                <span>{{ item.quantidade }}</span>
+                                <button type="button" (click)="aumentarQuantidade(item)">+</button>
+                            </div>
+
+                            <button type="button" class="botao-remover" (click)="removerItem(item.id)">
+                                Excluir
+                            </button>
+                        </div>
+                    </article>
+                }
+            </div>
+
+            <div class="total-carrinho">
+                <span>Total da compra:</span>
+                <strong>R$ {{ obterTotal() | number: '1.2-2' }}</strong>
+            </div>
+        }
+    </section>
+} @else {
+    <div class="carrinho-wrapper">
+        <button
+            class="carrinho-container"
+            type="button"
+            aria-label="Carrinho com {{ quantidade() }} itens"
+            (click)="irParaCarrinho()"
+        >
+            <span class="qtd-itens">{{ quantidade() }}</span>
+            <span class="icone-carrinho" aria-hidden="true">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </span>
+            <span class="texto-carrinho">Carrinho</span>
+        </button>
+    </div>
+}

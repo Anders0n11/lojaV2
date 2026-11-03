@@ -5,4 +5,5 @@ export type Produto = {
     preco: number
     quantidade: number
     foto: string
+    link?: string
 }

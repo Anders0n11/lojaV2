@@ -1,12 +1,13 @@
-import { Produto } from "./produto"
+import { Produto } from './produto';
 
 export class Item {
-    produto: Produto | undefined
-    quantidade: number
+    id: number;
+    produto: Produto | undefined;
+    quantidade: number;
 
-    constructor(prod: Produto |undefined, 
-                qtd: number) {
-        this.produto = prod
-        this.quantidade = qtd
+    constructor(prod: Produto | undefined, qtd: number, id?: number) {
+        this.id = id ?? prod?.id ?? 0;
+        this.produto = prod;
+        this.quantidade = qtd;
     }
 }

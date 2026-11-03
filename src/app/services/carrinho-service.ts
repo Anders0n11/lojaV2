@@ -1,85 +1,72 @@
 import { computed, Service, signal } from '@angular/core';
-import { Item } from '../models/item';
+import { Produto } from '../models/produto';
+
+export type Item = {
+  id: number;
+  produto: Produto | undefined;
+  quantidade: number;
+};
 
 @Service()
 export class CarrinhoService {
-    //signal de itens adicionados ao carrinho
-    readonly  #_itens = signal<Item[]>([])
-    /* signal de itens somente leitura a ser exposto para acesso externo */
-    readonly itens = this.#_itens.asReadonly();
+  readonly #itens = signal<Item[]>([]);
+  readonly itens = this.#itens.asReadonly();
 
-    readonly qtdItens = computed(() => {
-        let quant = 0
-        this.#_itens().forEach(el => {
-            quant += el.quantidade
-        });
-        return quant
-    });
+  readonly qtdItens = computed(() =>
+    this.#itens().reduce((total, item) => total + item.quantidade, 0)
+  );
 
-    constructor() {
-        let itensSessao = this.recuperarSessao()
-        if(itensSessao) {
-            this.#_itens.set(itensSessao)
+  adicionarItem(item: Item): void {
+    if (!item || item.quantidade <= 0 || !item.produto) {
+      return;
+    }
+
+    const produtoId = item.produto?.id ?? item.id;
+
+    const itemExistente = this.#itens().find(
+      (it) => it.id === item.id || it.produto?.id === produtoId
+    );
+
+    if (itemExistente) {
+      this.aumentarQuantidade(item.id);
+      return;
+    }
+
+    this.#itens.update((itens) => [...itens, item]);
+  }
+
+  aumentarQuantidade(itemId: number): void {
+    this.#itens.update((itens) =>
+      itens.map((item) =>
+        item.id === itemId ? { ...item, quantidade: item.quantidade + 1 } : item
+      )
+    );
+  }
+
+  diminuirQuantidade(itemId: number): void {
+    this.#itens.update((itens) =>
+      itens.flatMap((item) => {
+        if (item.id !== itemId) {
+          return [item];
         }
-    }
- 
-    adicionarItem(it: Item): boolean {
-        if (it) {
-            if (this.itemAdicionado(it)) {
-                this.aumentarQuantidade(it)
-                return false
-            }
-            this.#_itens.update(itens => [...itens, it]); 
-            this.salvarSessao()
-        }
 
-        return true
-    }
+        const novaQuantidade = item.quantidade - 1;
+        return novaQuantidade > 0 ? [{ ...item, quantidade: novaQuantidade }] : [];
+      })
+    );
+  }
 
-    itemAdicionado(item: Item): boolean {
-        return this.#_itens().some(it => 
-            it.produto?.id === item.produto?.id)
-    }
+  removerItem(itemId: number): void {
+    this.#itens.update((itens) => itens.filter((item) => item.id !== itemId));
+  }
 
-    aumentarQuantidade(it: Item): boolean {
-        if (!it) {
-            return false;
-        }
-        let encontrado = false;
+  obterTotalCompra(): number {
+    return this.#itens().reduce((total, item) => {
+      if (!item.produto) {
+        return total;
+      }
 
-        this.#_itens.update(itens =>
-            itens.map(item => {
-                if (item.produto?.id === it.produto?.id) {
-                    encontrado = true;
-
-                    return {
-                        ...item,
-                        quantidade: item.quantidade + 1
-                    };
-                }
-
-                return item;
-            })
-        );
-
-        this.salvarSessao()
-        return encontrado;
-    }
-
-
-    //Persiste o objeto de carrinho na sessão
-    salvarSessao() {
-        //Salva na session storage
-        localStorage.setItem(
-            'CARRINHO_LOJA_IFRN', 
-            JSON.stringify(this.#_itens()))
-    }
-
-    recuperarSessao() {
-        let itens = localStorage.getItem('CARRINHO_LOJA_IFRN')
-        if (itens) {
-            return JSON.parse(itens)
-        }
-        return null
-    }
+      return total + item.produto.preco * item.quantidade;
+    }, 0);
+  }
 }

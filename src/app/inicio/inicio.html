@@ -3,10 +3,32 @@
     <app-carrinho></app-carrinho>
 </div>
 
-@for(p of produtos(); track p.id) {
-    <p>{{p.nome}}</p>
-    <input type="button" 
-           value="Adicionar ao carrinho"
-           (click)="adicionar(p)">
+<div class="produtos-grid">
+    @for (p of produtos(); track p.id) {
+        <article class="produto-card">
+            <img
+                [ngSrc]="p.foto"
+                [alt]="p.nome"
+                width="900"
+                height="600"
+                priority
+            >
 
-}
+            <div class="produto-info">
+                <h2>
+                    @if (p.link) {
+                        <a [href]="p.link" target="_blank" rel="noopener noreferrer">{{ p.nome }}</a>
+                    } @else {
+                        {{ p.nome }}
+                    }
+                </h2>
+                <p class="produto-preco">R$ {{ p.preco | number: '1.2-2' }}</p>
+                <p class="produto-quantidade">Quantidade: {{ p.quantidade }}</p>
+
+                <button type="button" (click)="adicionar(p)">
+                    Adicionar ao carrinho
+                </button>
+            </div>
+        </article>
+    }
+</div>

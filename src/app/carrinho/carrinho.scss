@@ -1,9 +1,132 @@
+.carrinho-wrapper {
+    display: inline-block;
+}
+
 .carrinho-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 10px;
+    background-color: #111111;
+    color: #ffffff;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
+
+.qtd-itens {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #111111;
+    font-size: 0.8rem;
+    line-height: 1;
+}
+
+.icone-carrinho {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.texto-carrinho {
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+}
+
+.pagina-carrinho {
+    max-width: 900px;
+    margin: 32px auto;
+    padding: 24px;
+    background: #f8f8f8;
+    border-radius: 16px;
+}
+
+.cabecalho-carrinho h2 {
+    margin: 0 0 24px;
+    font-size: 2rem;
+}
+
+.lista-carrinho {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.card-item {
     display: flex;
     justify-content: space-between;
-    gap: 8px;
-    min-width: 48px;
-    padding: 4px 8px;
-    background-color: #000;
-    color: #fff;
+    align-items: center;
+    gap: 16px;
+    background: #ffffff;
+    border: 1px solid #e6e6e6;
+    border-radius: 12px;
+    padding: 18px;
+}
+
+.info-item h3 {
+    margin: 0 0 8px;
+    font-size: 1.2rem;
+}
+
+.info-item p {
+    margin: 4px 0;
+    color: #555;
+}
+
+.acoes-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.controle-quantidade {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #d4d4d4;
+    border-radius: 999px;
+    padding: 6px 10px;
+}
+
+.controle-quantidade button,
+.botao-remover {
+    border: none;
+    border-radius: 8px;
+    background: #111111;
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.controle-quantidade button {
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+}
+
+.botao-remover {
+    padding: 10px 14px;
+}
+
+.carrinho-vazio {
+    padding: 32px 16px;
+    text-align: center;
+    color: #555555;
+}
+
+.total-carrinho {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #dadada;
+    font-size: 1.2rem;
 }

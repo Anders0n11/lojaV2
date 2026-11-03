@@ -1,3 +1,4 @@
+import { DecimalPipe, NgOptimizedImage } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { LojaService } from '../services/loja-service';
 import { CarrinhoService } from '../services/carrinho-service';
@@ -6,7 +7,7 @@ import { Item } from '../models/item';
 import { Carrinho } from '../carrinho/carrinho';
 
 @Component({
-  imports: [Carrinho],
+  imports: [Carrinho, DecimalPipe, NgOptimizedImage],
   selector: 'app-inicio',
   styleUrl: './inicio.scss',
   templateUrl: './inicio.html',
